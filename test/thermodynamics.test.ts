@@ -105,21 +105,23 @@ describe("Owczarzy 2008 salt correction", () => {
 		expect(result.tm).toBeGreaterThan(50);
 		expect(result.tm).toBeLessThan(75);
 	});
-});
 
-// ── dna24 vs SantaLucia 1998 ─────────────────────────────────────────────────
-describe("dna24 model", () => {
-	it("gives different ΔS than SL98 for same sequence", () => {
-		const sl98 = calcNNThermo("GCGCGCGCGCGCGCGCGCGC", "santa_lucia_1998");
-		const d24 = calcNNThermo("GCGCGCGCGCGCGCGCGCGC", "dna24");
-		// dna24 applies correction terms; sums will differ
-		expect(sl98.dS).not.toBeCloseTo(d24.dS, 3);
+	it("high-Mg regime (R ≥ 6) returns finite Tm in a reasonable range", () => {
+		// R = sqrt(mg) / mono = sqrt(0.01) / 0.002 = 0.1 / 0.002 = 50 ≥ 6 → Mg-dominant branch
+		const result = calcTm(seq, { saltModel: "owczarzy_2008", oligoConc: 250e-9, monoConc: 0.002, mgConc: 0.01, dntpConc: 0 });
+		expect(Number.isFinite(result.tm)).toBe(true);
+		expect(result.tm).toBeGreaterThan(55);
+		expect(result.tm).toBeLessThan(80);
 	});
 
-	it("produces a Tm within 5°C of SL98 for typical primers", () => {
-		const sl98 = calcTm("GCTTCGGCACCAGACATGAT", { nnModel: "santa_lucia_1998" });
-		const d24 = calcTm("GCTTCGGCACCAGACATGAT", { nnModel: "dna24" });
-		expect(Math.abs(sl98.tm - d24.tm)).toBeLessThan(5);
+	it("Tm increases monotonically with Mg²⁺ in the high-Mg regime (R ≥ 6)", () => {
+		// All three conditions have R ≥ 6 (monoConc=0.002, mg from 0.005 to 0.025)
+		// sqrt(0.005)/0.002 = 35.4, sqrt(0.015)/0.002 = 61.2, sqrt(0.025)/0.002 = 79.1
+		const low  = calcTm(seq, { saltModel: "owczarzy_2008", oligoConc: 250e-9, monoConc: 0.002, mgConc: 0.005, dntpConc: 0 });
+		const mid  = calcTm(seq, { saltModel: "owczarzy_2008", oligoConc: 250e-9, monoConc: 0.002, mgConc: 0.015, dntpConc: 0 });
+		const high = calcTm(seq, { saltModel: "owczarzy_2008", oligoConc: 250e-9, monoConc: 0.002, mgConc: 0.025, dntpConc: 0 });
+		expect(mid.tm).toBeGreaterThan(low.tm);
+		expect(high.tm).toBeGreaterThan(mid.tm);
 	});
 });
 

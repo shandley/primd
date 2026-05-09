@@ -2,11 +2,11 @@
 
 /**
  * Which nearest-neighbor parameter set to use for Tm calculation.
- * - "santa_lucia_1998": classic unified parameters, industry standard
- * - "dna24": updated parameters derived from 27,732 hairpin measurements
- *   (Wayment-Steele et al. 2024, Nature Communications)
+ * Currently only "santa_lucia_1998" (SantaLucia 1998, PNAS 95:1460) is
+ * supported. The parameter is kept in the API for forward-compatibility
+ * as additional validated parameter sets are added.
  */
-export type NNModel = "santa_lucia_1998" | "dna24";
+export type NNModel = "santa_lucia_1998";
 
 /**
  * Which salt correction formula to apply.
@@ -75,6 +75,8 @@ export interface PrimerCandidate {
 	polyRun: number;
 	/** Number of off-target binding sites within the template */
 	offTarget: number;
+	/** Template accessibility at the binding site [0,1] — 1 = fully single-stranded */
+	templateAccessibility: number;
 	/** Overall penalty score (lower = better) */
 	penalty: number;
 }
@@ -115,6 +117,10 @@ export interface PCROptions extends ThermoOptions {
 	maxPolyRun?: number;
 	/** Number of top pairs to return. Default: 5 */
 	numReturn?: number;
+	/** Annealing temperature for template accessibility scoring (°C). Default: tmTarget − 5 */
+	annealTempC?: number;
+	/** Minimum template accessibility [0,1] to pass the hard filter. Default: 0.05 */
+	minTemplateAccessibility?: number;
 }
 
 export interface PCRResult {

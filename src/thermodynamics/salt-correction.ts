@@ -61,7 +61,8 @@ function freeMg(totalMg: number, totalDNTP: number): number {
  *   0.22 ≤ R < 6.0 → use mixed ionic strength equation
  *   R ≥ 6.0 → use pure Mg²⁺ equation
  *
- * Eq. 16 (pure Mg) and Eq. 17 (mixed) from the paper.
+ * Eq. 16 from the paper; in the mixed regime (0.22 ≤ R < 6.0) the same equation
+ * is used but with monovalent-dependent correction factors applied to a, d, and g.
  */
 function applyMg2008(
 	tm1M: number,
@@ -88,29 +89,27 @@ function applyMg2008(
 	if (ratio < 0.22) {
 		// Monovalent dominates — use 2004 formula
 		return applyMono2004(tm1M, monoConc, fGC);
-	} else if (ratio < 6.0) {
-		// Mixed regime — Eq. 17
-		const a = 3.92e-5;
-		const b = -9.11e-6;
-		const c = 6.26e-5;
-		const d = 1.42e-5;
-		const e = -4.82e-4;
-		const f = 5.25e-4;
-		const g = 8.31e-5;
-		invTm = 1 / (tm1M + 273.15)
-			+ a
-			+ b * lnMg
-			+ fGC * (c + d * lnMg)
-			+ (1 / (2 * (N - 1))) * (e + f * lnMg + g * lnMg * lnMg);
 	} else {
-		// Mg²⁺ dominates — Eq. 16
-		const a = 3.92e-5;
+		// Base coefficients from Owczarzy 2008 Table 2 (Eq. 16, pure Mg²⁺ regime).
+		// Source: primer3 oligotm.c; Owczarzy et al. 2008 Biochemistry 47:5336–5353.
+		let a = 3.92e-5;
 		const b = -9.11e-6;
 		const c = 6.26e-5;
-		const d = 1.42e-5;
+		let d = 1.42e-5;
 		const e = -4.82e-4;
 		const f = 5.25e-4;
-		const g = 8.31e-5;
+		let g = 8.31e-5;
+
+		if (ratio < 6.0) {
+			// Mixed regime (0.22 ≤ R < 6.0): adjust a, d, g with monovalent-dependent
+			// correction factors (Owczarzy 2008 Eq. 16 mixed-regime modification).
+			// b, c, e, f are unchanged.
+			const lnMono = Math.log(monoConc);
+			a = 3.92e-5 * (0.843 - 0.352 * Math.sqrt(monoConc) * lnMono);
+			d = 1.42e-5 * (1.279 - 4.03e-3 * lnMono - 8.03e-3 * lnMono * lnMono);
+			g = 8.31e-5 * (0.486 - 0.258 * lnMono + 5.25e-3 * lnMono * lnMono * lnMono);
+		}
+
 		invTm = 1 / (tm1M + 273.15)
 			+ a
 			+ b * lnMg
