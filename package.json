@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "Modern, web-native primer design library — PCR, qPCR, LAMP, and assembly primers with up-to-date thermodynamics",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     }
   },
   "files": ["dist", "README.md", "LICENSE"],
