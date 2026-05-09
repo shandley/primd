@@ -6,6 +6,8 @@
 
 import { describe, it, expect } from "vitest";
 import { calcHeteroDimerDG } from "../src/thermodynamics/secondary-structure.js";
+import { calcAccessibility } from "../src/thermodynamics/accessibility.js";
+import { reverseComplement } from "../src/thermodynamics/index.js";
 import { designPCR } from "../src/modes/pcr.js";
 
 // ── Bug 1: Heterodimer directionality ─────────────────────────────────────────
@@ -213,6 +215,54 @@ describe("designPCR — heteroDimerDG field reflects bidirectional minimum", () 
 			const oneDirectional = calcHeteroDimerDG(pair.fwd.seq, pair.rev.seq);
 			// The stored value is min(f→r, r→f), so it must be ≤ f→r alone
 			expect(pair.heteroDimerDG).toBeLessThanOrEqual(oneDirectional + 1e-9);
+		}
+	});
+});
+
+// ── Strand-correct accessibility: fwd checks bottom strand, rev checks top strand ──
+//
+// Forward primers anneal to the bottom strand (RC of seq).
+// Reverse primers anneal to the top strand (seq).
+// templateAccessibility must reflect the strand the primer actually binds.
+//
+// We verify this by checking that each returned primer's templateAccessibility
+// matches what calcAccessibility returns when called on the correct strand.
+describe("designPCR — templateAccessibility is strand-correct", () => {
+	const PUC19_LONG =
+		"TCGCGCGTTTCGGTGATGACGGTGAAAACCTCTGACACATGCAGCTCCCGGAGACGGTCA" +
+		"CAGCTTGTCTGTAAGCGGATGCCGGGAGCAGACAAGCCCGTCAGGGCGCGTCAGCGGGTG" +
+		"TTGGCGGGTGTCGGGGCTGGCTTAACTATGCGGCATCAGAGCAGATTGTACTGAGAGTGC" +
+		"ACCATATGCGGTGTGAAATACCGCACAGATGCGTAAGGAGAAAATACCGCATCAGGCGCC" +
+		"ATTCGCCATTCAGGCTGCGCAACTGTTGGGAAGGGCGATCGGTGCGGGCCTCTTCGCTAT" +
+		"TACGCCAGCTGGCGAAAGGGGGATGTGCTGCAAGGCGATTAAGTTGGGTAACGCCAGGGT" +
+		"TTTCCCAGTCACGACGTTGTAAAACGACGGCCAGTGAATTCGAGCTCGGTACCCGGGGAT" +
+		"CCTCTAGAGTCGACCTGCAGGCATGCAAGCTTGGCGTAATCATGGTCATAGCTGTTTCCT" +
+		"GTGTGAAATTGTTATCCGCTCACAATTCCACACAACATACGAGCCGGAAGCATAAAGTGT" +
+		"AAAGCCTGGGGTGCCTAATGAGTGAGCTAACTCACATTAATTGCGTTGCGCTCACTGCCC";
+
+	it("fwd primer templateAccessibility matches calcAccessibility on the bottom strand", () => {
+		const result = designPCR(PUC19_LONG, 200, 400, { productSizeRange: [150, 500], annealTempC: 55 });
+		expect(result.pairs.length).toBeGreaterThan(0);
+
+		const rc = reverseComplement(PUC19_LONG);
+		for (const pair of result.pairs) {
+			const { fwd } = pair;
+			// Forward primer at top-strand [start, end); on RC strand the start is seqLen - end
+			const rcStart = PUC19_LONG.length - fwd.end;
+			const expected = calcAccessibility(rc, rcStart, fwd.len, { annealTempC: 55 });
+			expect(fwd.templateAccessibility).toBeCloseTo(expected, 4);
+		}
+	});
+
+	it("rev primer templateAccessibility matches calcAccessibility on the top strand", () => {
+		const result = designPCR(PUC19_LONG, 200, 400, { productSizeRange: [150, 500], annealTempC: 55 });
+		expect(result.pairs.length).toBeGreaterThan(0);
+
+		for (const pair of result.pairs) {
+			const { rev } = pair;
+			// Reverse primer at top-strand [start, end); top strand accessibility at start
+			const expected = calcAccessibility(PUC19_LONG, rev.start, rev.len, { annealTempC: 55 });
+			expect(rev.templateAccessibility).toBeCloseTo(expected, 4);
 		}
 	});
 });

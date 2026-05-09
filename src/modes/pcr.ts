@@ -21,7 +21,6 @@ interface ScoringOpts {
 	gcRange: [number, number];
 	maxHairpinDG: number;
 	maxSelfDimerDG: number;
-	accessProfile: Float32Array;
 }
 
 function makePrimerCandidate(
@@ -30,6 +29,7 @@ function makePrimerCandidate(
 	end: number,
 	tmOpts: TmOptions,
 	primerOpts: ScoringOpts,
+	templateAccessibility: number,
 ): PrimerCandidate {
 	const tmResult = calcTm(seq, tmOpts);
 	const gc = calcGC(seq);
@@ -37,7 +37,6 @@ function makePrimerCandidate(
 	const hairpinDG = calcHairpinDG(seq);
 	const selfDimerDG = calcSelfDimerDG(seq);
 	const poly = maxPolyRun(seq);
-	const templateAccessibility = primerOpts.accessProfile[start] ?? 1.0;
 
 	// Penalty: quadratic distance from Tm target + weighted structure penalties
 	const tmPenalty = Math.pow(tmResult.tm - primerOpts.tmTarget, 2) * 0.5;
@@ -97,11 +96,14 @@ export function designPCR(
 
 	const tmOpts: TmOptions = buildTmOpts(opts);
 
-	// Pre-compute accessibility profile once — O(n·W³) total, not per candidate
+	// Pre-compute accessibility profiles once — O(n·W³) total, not per candidate.
+	// Forward primers anneal to the bottom strand template; reverse primers anneal to the top strand.
+	// Each profile is computed on the strand the primer physically anneals to.
 	const avgPrimerLen = Math.round((primerLen[0] + primerLen[1]) / 2);
-	const accessProfile = calcAccessibilityProfile(seq, avgPrimerLen, { annealTempC });
+	const fwdAccessProfile = calcAccessibilityProfile(reverseComplement(seq), avgPrimerLen, { annealTempC });
+	const revAccessProfile = calcAccessibilityProfile(seq, avgPrimerLen, { annealTempC });
 
-	const scoringOpts: ScoringOpts = { tmTarget, gcRange, maxHairpinDG, maxSelfDimerDG, accessProfile };
+	const scoringOpts: ScoringOpts = { tmTarget, gcRange, maxHairpinDG, maxSelfDimerDG };
 
 	// Generate forward candidates: left of the target region
 	const fwdCandidates: PrimerCandidate[] = [];
@@ -116,11 +118,13 @@ export function designPCR(
 			const gc = calcGC(primerSeq);
 			if (gc < gcRange[0] || gc > gcRange[1]) continue;
 			if (maxPolyRun(primerSeq) > maxPoly) continue;
-			const candidate = makePrimerCandidate(primerSeq, start, end, tmOpts, scoringOpts);
+			// Forward primer anneals to bottom strand; RC coordinate = seq.length - end
+			const access = fwdAccessProfile[seq.length - end] ?? 1.0;
+			if (access < minAccess) continue;
+			const candidate = makePrimerCandidate(primerSeq, start, end, tmOpts, scoringOpts, access);
 			if (Math.abs(candidate.tm - tmTarget) > 15) continue;
 			if (candidate.hairpinDG < maxHairpinDG) continue;
 			if (candidate.selfDimerDG < maxSelfDimerDG) continue;
-			if (candidate.templateAccessibility < minAccess) continue;
 			fwdCandidates.push(candidate);
 		}
 	}
@@ -139,11 +143,13 @@ export function designPCR(
 			const gc = calcGC(primerSeq);
 			if (gc < gcRange[0] || gc > gcRange[1]) continue;
 			if (maxPolyRun(primerSeq) > maxPoly) continue;
-			const candidate = makePrimerCandidate(primerSeq, start, end, tmOpts, scoringOpts);
+			// Reverse primer anneals to top strand; top-strand coordinate = start
+			const access = revAccessProfile[start] ?? 1.0;
+			if (access < minAccess) continue;
+			const candidate = makePrimerCandidate(primerSeq, start, end, tmOpts, scoringOpts, access);
 			if (Math.abs(candidate.tm - tmTarget) > 15) continue;
 			if (candidate.hairpinDG < maxHairpinDG) continue;
 			if (candidate.selfDimerDG < maxSelfDimerDG) continue;
-			if (candidate.templateAccessibility < minAccess) continue;
 			revCandidates.push(candidate);
 		}
 	}
