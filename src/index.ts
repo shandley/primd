@@ -5,7 +5,7 @@
  *   thermodynamics  calcTm, calcGC, reverseComplement, calcHairpinDG, etc. (SantaLucia 1998 + Owczarzy 2004/2008)
  *   modes/pcr       designPCR — standard PCR primer pairs
  *   modes/lamp      designLAMP — LAMP primer sets (F3/FIP/B3/BIP + optional loop primers)
- *   modes/assembly  designAssembly — Gibson/Golden Gate primers (coming soon)
+ *   modes/assembly  designAssembly — Gibson Assembly and Golden Gate primers
  *   modes/qpcr      designQPCR — qPCR primer pairs with efficiency scoring
  */
 
@@ -21,6 +21,7 @@ export type { AccessibilityOpts } from "./thermodynamics/accessibility.js";
 export { designPCR } from "./modes/pcr.js";
 export { designQPCR } from "./modes/qpcr.js";
 export { designLAMP } from "./modes/lamp.js";
+export { designAssembly } from "./modes/assembly.js";
 
 // Types
 export type {
