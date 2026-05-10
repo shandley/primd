@@ -104,6 +104,10 @@ function tmCenter(range: [number, number]): number {
  * @param regionStart 0-indexed start of the region to amplify/detect
  * @param regionEnd   0-indexed end of the region (exclusive)
  * @param opts        Design parameters
+ *
+ * **AT-rich sequences (<35% GC):** Default Tm ranges (outer 58–62°C, inner 63–68°C) may
+ * return 0 sets because valid primers do not exist at these temperatures. Relax the ranges:
+ * `{ outerTmRange: [50, 56], innerTmRange: [55, 62], loopTmRange: [52, 58] }`.
  */
 export function designLAMP(
 	template: string,

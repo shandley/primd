@@ -84,6 +84,46 @@ Both tools design primers for the same target regions; the best pairs are compar
 
 ---
 
+---
+
+## Approach 3: LAMP Validation (real biological sequences)
+
+LAMP (Loop-mediated Isothermal Amplification) has no open-source design counterpart equivalent to primer3. Primer Explorer (the field standard) is proprietary and web-only. Validation instead checks Notomi 2000 geometry constraints and Tm ordering rules, and verifies thermodynamic output against a published IS6110 primer set.
+
+### Design recovery on real sequences
+
+**Test set:** 4 sequences spanning 38–64% GC, 100 bp target regions.
+
+| Sequence | GC% | Sets returned | Geometry | Tm ordering | Inner amp (bp) |
+|----------|-----|---------------|----------|-------------|----------------|
+| SARS-CoV-2 ORF1a | 38% | 3 | ✅ | ✅ | 197 |
+| *E. coli* rpoB | 57% | 3 | ✅ | ✅ | 167 |
+| *H. sapiens* GAPDH | 60% | 3 | ✅ | ✅ | 200 |
+| *M. tuberculosis* IS6110 | 64% | 1 | ✅ | ✅ | 175 |
+
+Geometry checks verify all six Notomi 2000 spatial constraints simultaneously. Tm ordering requires outer (F3/B3) primers cooler than all inner parts (FIP/BIP components), which is mandatory for efficient LAMP amplification — displacement of outer primers at the inner primer annealing temperature.
+
+**SARS-CoV-2 note**: the target region must be ≤200 bp (inner amplicon constraint). A 195 bp target region leaves no margin; choosing a 100 bp target region (`regionStart=55, regionEnd=155`) yields 3 sets with geometry and Tm ordering satisfied.
+
+### Published primer Tm verification (IS6110, Sun 2017)
+
+Source: Sun J et al. (2017) *Oncotarget* 8(60):102264.
+
+| Primer | Tm (primd) | Role |
+|--------|-----------|------|
+| F3 | 53.8°C | Outer |
+| B3 | 55.4°C | Outer |
+| F1c | 61.0°C | Inner |
+| F2 | 59.6°C | Inner |
+| B1c | 61.7°C | Inner |
+| B2 | 52.3°C | Inner |
+
+Outer mean: 54.6°C · Inner mean (F1c, F2, B1c): 60.8°C → **Tm ordering confirmed** ✅
+
+The published B2 Tm (52.3°C) is below the inner Tm target range — consistent with experimental primer sets that were designed manually or with different Tm targets. primd would not select this primer as a top candidate under default settings, which is expected.
+
+---
+
 ## Limitations and Known Issues
 
 **1. primd length preference reduced but not eliminated**
@@ -92,10 +132,24 @@ After adding an explicit `|len - 20| × 1.0` length penalty, mean primer length 
 **2. No experimental wet-lab validation**
 Neither primer set has been ordered and tested. The validation here is computational: thermodynamic implementation fidelity relative to primer3. Actual PCR success depends on additional factors (polymerase, template complexity, buffer optimization) not captured by either tool.
 
-**3. Extreme AT-rich sequences**
-For sequences <30% GC (e.g., *P. falciparum* introns), the default Tm target (60°C) may be unachievable within the GC% and length constraints. Both primer3 and primd return fewer pairs for such sequences. Users should lower `tmTarget` to 52–55°C for extremely AT-rich organisms.
+**3. Extreme AT-rich sequences (PCR)**
+For sequences <30% GC (e.g., *P. falciparum* introns), the default Tm target (60°C) may be unachievable within the GC% and length constraints. Both primer3 and primd return 0 pairs for *P. falciparum* MSP1 (29% GC) — correct behavior. Users should lower `tmTarget` to 52–55°C for extremely AT-rich organisms.
 
-**4. Owczarzy 2008 vs 2004 divergence**
+**4. AT-rich LAMP sequences**
+LAMP requires 6 primers with Tms in tight ranges (outer 58–62°C, inner 63–68°C) and GC% between 35–70%. For templates <35% GC (e.g., *P. falciparum*, *A. thaliana* introns), it may be impossible to satisfy all six constraints simultaneously under default settings. Symptoms:
+- 0 sets returned with "No valid forward inner primers" warning
+- Reducing `innerTmRange` to `[55, 62]` and `outerTmRange` to `[50, 56]` allows primer finding at the cost of reduced amplification efficiency
+
+```typescript
+// For AT-rich templates (~30-40% GC):
+designLAMP(seq, start, end, {
+  innerTmRange: [55, 62],
+  outerTmRange: [50, 56],
+  loopTmRange:  [52, 58],
+})
+```
+
+**5. Owczarzy 2008 vs 2004 divergence**
 The 0.15°C systematic bias with Mg²⁺ reflects a genuine difference between published correction formulas. Neither formula is "wrong" — Owczarzy 2008 incorporates additional experimental data on dNTP/Mg²⁺ binding. For consistency with primer3-derived protocols, users can set `saltModel: "owczarzy_2004"` explicitly.
 
 ---
