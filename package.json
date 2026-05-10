@@ -1,6 +1,6 @@
 {
   "name": "@shandley/primd",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Modern, web-native primer design library \u2014 PCR, qPCR, LAMP, and assembly primers with up-to-date thermodynamics",
   "type": "module",
   "main": "./dist/index.js",

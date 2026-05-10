@@ -6,7 +6,7 @@
  *   modes/pcr       designPCR — standard PCR primer pairs
  *   modes/lamp      designLAMP — LAMP primer sets (F3/FIP/B3/BIP + optional loop primers)
  *   modes/assembly  designAssembly — Gibson/Golden Gate primers (coming soon)
- *   modes/qpcr      designQPCR — qPCR primer pairs with efficiency scoring (coming soon)
+ *   modes/qpcr      designQPCR — qPCR primer pairs with efficiency scoring
  */
 
 // Thermodynamics
@@ -19,6 +19,7 @@ export type { AccessibilityOpts } from "./thermodynamics/accessibility.js";
 
 // Design modes
 export { designPCR } from "./modes/pcr.js";
+export { designQPCR } from "./modes/qpcr.js";
 export { designLAMP } from "./modes/lamp.js";
 
 // Types
