@@ -45,9 +45,12 @@ const F2_F1_GAP: [number, number] = [0, 10]; // F2_end → F1_start
 const B1C_B2C_GAP: [number, number] = [0, 10]; // B1c_end → B2c_start
 const B2C_B3_GAP: [number, number] = [0, 20]; // B2c_end → B3c_start
 
-const DEFAULT_OUTER_TM: [number, number] = [59, 67];
-const DEFAULT_INNER_TM: [number, number] = [60, 65];
-const DEFAULT_LOOP_TM: [number, number] = [62, 68];
+// Per Notomi 2000 / Primer Explorer v5: outer (F3/B3) must be cooler than
+// inner parts so that at inner annealing temperature the outer primers are
+// fully displaced. Violating this prevents efficient LAMP amplification.
+const DEFAULT_OUTER_TM: [number, number] = [58, 62];
+const DEFAULT_INNER_TM: [number, number] = [63, 68];
+const DEFAULT_LOOP_TM: [number, number] = [60, 65];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 

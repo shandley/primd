@@ -1,0 +1,206 @@
+{
+  "results": [
+    {
+      "seqId": "SARS2_N_gene",
+      "sets": 0,
+      "warning": "No valid inner primer combinations meet the geometric constraints. The region may be too large for LAMP (inner amplicon max 200 bp)."
+    },
+    {
+      "seqId": "ecoli_rpoB",
+      "organism": "Escherichia coli K-12",
+      "gcPct": 57,
+      "sets": 3,
+      "best": {
+        "F3": {
+          "seq": "CAGCGCAACCTGTTCGAC",
+          "tm": 62.33,
+          "len": 18,
+          "start": 51
+        },
+        "B3": {
+          "seq": "TCATCATCATGTTCATCGCGA",
+          "tm": 60.04,
+          "len": 21
+        },
+        "FIP": {
+          "seq": "TCGATCGCTTCGCCGATGTCAGACCCTGGCGCAGTTCAAA",
+          "tm1": 65.66,
+          "tm2": 65.32
+        },
+        "BIP": {
+          "seq": "CAGCAGCTGCTGCGCAAGGCTCATGTCCAGCATGTGCG",
+          "tm1": 65.9,
+          "tm2": 65.11
+        },
+        "LoopF": {
+          "seq": "TGACGAACAGGGTGGTGATTT",
+          "tm": 62.45
+        },
+        "LoopB": {
+          "seq": "TGCTGGAGCGGATCCAG",
+          "tm": 62.39
+        }
+      },
+      "geometry": {
+        "issues": [],
+        "innerAmpLen": 167,
+        "f3ToF2": 19,
+        "b2ToB3": 25
+      },
+      "tmOrdering": {
+        "outerMean": 61.18375260455886,
+        "innerMean": 65.49635926506616,
+        "tmOrdering": true
+      },
+      "recoveryNote": null
+    },
+    {
+      "seqId": "human_GAPDH",
+      "organism": "Homo sapiens",
+      "gcPct": 60,
+      "sets": 3,
+      "best": {
+        "F3": {
+          "seq": "GATTTGGTCGTATTGGGCG",
+          "tm": 59.42,
+          "len": 19,
+          "start": 28
+        },
+        "B3": {
+          "seq": "CGCTGTTGAAGTCAGAGGA",
+          "tm": 59.91,
+          "len": 19
+        },
+        "FIP": {
+          "seq": "AAAGATGAAGGTGGCCTTGGGCTCCAGAGCTGAAGCAGGCTATC",
+          "tm1": 66.3,
+          "tm2": 64.69
+        },
+        "BIP": {
+          "seq": "AAGGTGGTGAAGCAGGCGTCTAGCCCAGGATGCCCTTGAG",
+          "tm1": 66.1,
+          "tm2": 64.81
+        },
+        "LoopF": {
+          "seq": "TGACGCTGAAGGGATCACC",
+          "tm": 62.57
+        },
+        "LoopB": {
+          "seq": "CTATTTCATAGCCCGCCTGGA",
+          "tm": 62.49
+        }
+      },
+      "geometry": {
+        "issues": [],
+        "innerAmpLen": 200,
+        "f3ToF2": 39,
+        "b2ToB3": 38
+      },
+      "tmOrdering": {
+        "outerMean": 59.660780314771216,
+        "innerMean": 65.47442993668892,
+        "tmOrdering": true
+      },
+      "recoveryNote": null
+    },
+    {
+      "seqId": "MTB_IS6110",
+      "organism": "Mycobacterium tuberculosis",
+      "gcPct": 64,
+      "sets": 1,
+      "best": {
+        "F3": {
+          "seq": "GATGAACCGCCCCGGCAT",
+          "tm": 66.51,
+          "len": 18,
+          "start": 1
+        },
+        "B3": {
+          "seq": "CACTTACGCACCGTCTCC",
+          "tm": 60.89,
+          "len": 18
+        },
+        "FIP": {
+          "seq": "CCACCTGACATGACCCCATCCGTCCGGAGACTCCAGTTCTTGG",
+          "tm1": 65.84,
+          "tm2": 65.25
+        },
+        "BIP": {
+          "seq": "CGATCAGTGAGGTCGCCCGGCGCAGCCAACACCAAGTAG",
+          "tm1": 66.07,
+          "tm2": 65.02
+        },
+        "LoopF": {
+          "seq": "GCGGGTACCTCCTCGATG",
+          "tm": 62.81
+        },
+        "LoopB": {
+          "seq": "GCAGAGATCCGCGGTCA",
+          "tm": 62.59
+        }
+      },
+      "geometry": {
+        "issues": [],
+        "innerAmpLen": 175,
+        "f3ToF2": 18,
+        "b2ToB3": 18
+      },
+      "tmOrdering": {
+        "outerMean": 63.698228215429566,
+        "innerMean": 65.54483206653497,
+        "tmOrdering": true
+      },
+      "recoveryNote": null
+    }
+  ],
+  "is6110PublishedTms": {
+    "F3": {
+      "seq": "AGACCTCACCTATGTGTCGA",
+      "tm": 53.82,
+      "gc": 50,
+      "len": 20
+    },
+    "B3": {
+      "seq": "TCGCTGAACCGGATCGA",
+      "tm": 55.38,
+      "gc": 58.8,
+      "len": 17
+    },
+    "F1c": {
+      "seq": "ATGGAGGTGGCCATCGTGGA",
+      "tm": 60.96,
+      "gc": 60,
+      "len": 20
+    },
+    "F2": {
+      "seq": "AGCCTACGTGGCCTTTGTCAC",
+      "tm": 59.61,
+      "gc": 57.1,
+      "len": 21
+    },
+    "B1c": {
+      "seq": "AAGCCATCTGGACCCGCCAA",
+      "tm": 61.73,
+      "gc": 60,
+      "len": 20
+    },
+    "B2": {
+      "seq": "CCCCTATCGTATGGTGGAT",
+      "tm": 52.28,
+      "gc": 52.6,
+      "len": 19
+    },
+    "LF": {
+      "seq": "AGGATCCTGCGAGCGTAG",
+      "tm": 56.2,
+      "gc": 61.1,
+      "len": 18
+    },
+    "LB": {
+      "seq": "AAGAAGGCGTACTCGACCTG",
+      "tm": 56.06,
+      "gc": 55,
+      "len": 20
+    }
+  }
+}

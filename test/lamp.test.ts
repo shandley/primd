@@ -123,26 +123,34 @@ describe("designLAMP — coordinate geometry", () => {
 });
 
 describe("designLAMP — Tm constraints", () => {
-	it("outer primers (F3/B3) have Tm in reasonable range 55–72°C", () => {
+	it("outer primers (F3/B3) Tm in default outer range 58–62°C", () => {
 		const result = designLAMP(TEMPLATE, REGION_START, REGION_END);
 		const set = result.sets[0];
-		expect(set.F3.tm).toBeGreaterThan(55);
-		expect(set.F3.tm).toBeLessThan(72);
-		expect(set.B3.tm).toBeGreaterThan(55);
-		expect(set.B3.tm).toBeLessThan(72);
+		expect(set.F3.tm).toBeGreaterThanOrEqual(58);
+		expect(set.F3.tm).toBeLessThanOrEqual(62);
+		expect(set.B3.tm).toBeGreaterThanOrEqual(58);
+		expect(set.B3.tm).toBeLessThanOrEqual(62);
 	});
 
-	it("inner primer parts (F1c, F2, B1c, B2) have Tm in reasonable range 55–72°C", () => {
+	it("inner primer parts (F1c, F2, B1c, B2) Tm in default inner range 63–68°C", () => {
 		const result = designLAMP(TEMPLATE, REGION_START, REGION_END);
 		const set = result.sets[0];
-		expect(set.FIP.tm1).toBeGreaterThan(55);
-		expect(set.FIP.tm1).toBeLessThan(72);
-		expect(set.FIP.tm2).toBeGreaterThan(55);
-		expect(set.FIP.tm2).toBeLessThan(72);
-		expect(set.BIP.tm1).toBeGreaterThan(55);
-		expect(set.BIP.tm1).toBeLessThan(72);
-		expect(set.BIP.tm2).toBeGreaterThan(55);
-		expect(set.BIP.tm2).toBeLessThan(72);
+		expect(set.FIP.tm1).toBeGreaterThanOrEqual(63);
+		expect(set.FIP.tm1).toBeLessThanOrEqual(68);
+		expect(set.FIP.tm2).toBeGreaterThanOrEqual(63);
+		expect(set.FIP.tm2).toBeLessThanOrEqual(68);
+		expect(set.BIP.tm1).toBeGreaterThanOrEqual(63);
+		expect(set.BIP.tm1).toBeLessThanOrEqual(68);
+		expect(set.BIP.tm2).toBeGreaterThanOrEqual(63);
+		expect(set.BIP.tm2).toBeLessThanOrEqual(68);
+	});
+
+	it("outer primers are cooler than inner parts (Notomi ordering)", () => {
+		const result = designLAMP(TEMPLATE, REGION_START, REGION_END);
+		const set = result.sets[0];
+		const outerMean = (set.F3.tm + set.B3.tm) / 2;
+		const innerMean = (set.FIP.tm1 + set.FIP.tm2 + set.BIP.tm1 + set.BIP.tm2) / 4;
+		expect(innerMean).toBeGreaterThan(outerMean);
 	});
 
 	it("sets are returned in order of ascending penalty", () => {
