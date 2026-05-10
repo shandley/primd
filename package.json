@@ -1,7 +1,7 @@
 {
   "name": "@shandley/primd",
-  "version": "0.1.0",
-  "description": "Modern, web-native primer design library — PCR, qPCR, LAMP, and assembly primers with up-to-date thermodynamics",
+  "version": "0.1.1",
+  "description": "Modern, web-native primer design library \u2014 PCR, qPCR, LAMP, and assembly primers with up-to-date thermodynamics",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -13,7 +13,11 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc --project tsconfig.build.json && node scripts/build-cjs.mjs",
     "dev": "tsc --watch",
@@ -45,6 +49,9 @@
     "vitest": "^3.0.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild"
+    ]
   }
 }
