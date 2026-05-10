@@ -2,8 +2,56 @@
   "results": [
     {
       "seqId": "SARS2_N_gene",
-      "sets": 0,
-      "warning": "No valid inner primer combinations meet the geometric constraints. The region may be too large for LAMP (inner amplicon max 200 bp)."
+      "organism": "SARS-CoV-2",
+      "gcPct": 38,
+      "sets": 3,
+      "best": {
+        "F3": {
+          "seq": "CAATAGCAGTCCAGATGACCA",
+          "tm": 60.06,
+          "len": 21,
+          "start": 1
+        },
+        "B3": {
+          "seq": "TGTAGCACGATTGCAGCA",
+          "tm": 60.02,
+          "len": 18
+        },
+        "FIP": {
+          "seq": "CGTCACCACCACGAATTCGTCTTGGCTACTACCGAAGAGCTACC",
+          "tm1": 65.53,
+          "tm2": 63.82
+        },
+        "BIP": {
+          "seq": "TTGCAACTGAGGGAGCCTTGAATGCGGGTGCCAATGTGATCTT",
+          "tm1": 65.09,
+          "tm2": 65.69
+        },
+        "LoopF": {
+          "seq": "ACCATCTTGGACTGAGATCTT",
+          "tm": 58.67
+        },
+        "LoopB": {
+          "seq": "AAGCTGGACTTCCCTATGGTG",
+          "tm": 62.4
+        }
+      },
+      "geometry": {
+        "issues": [],
+        "innerAmpLen": 197,
+        "f3ToF2": 24,
+        "b2ToB3": 31
+      },
+      "tmOrdering": {
+        "outerMean": 60.036861528956024,
+        "innerMean": 65.03509932122246,
+        "tmOrdering": true
+      },
+      "recoveryNote": {
+        "f3Delta": 24,
+        "b3Delta": 11,
+        "close": false
+      }
     },
     {
       "seqId": "ecoli_rpoB",

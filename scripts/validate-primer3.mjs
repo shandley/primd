@@ -459,10 +459,10 @@ for (const seq of SEQUENCES) {
 md.push("");
 
 md.push("## Interpretation notes");
-md.push("- **Positional agreement** is expected to be low — both tools find valid primers at similar Tm but use different penalty weightings. primer3 prefers 20bp; primd scores accessibility and allows up to 27bp. Position disagreement does not indicate error.");
-md.push("- **Tm MAE < 0.5°C** is within experimental measurement noise for standard oligonucleotides.");
-md.push("- **Systematic bias**: positive bias means primd predicts higher Tm than primer3. This is expected if longer primers are selected (more NN stacking).");
-md.push("- **Pearson r > 0.99** indicates the thermodynamic model is well-calibrated.");
+md.push("- **Tm MAE and Pearson r here compare Tm of *different* primer sequences** (each tool selects its own). This is NOT a thermodynamic accuracy metric. For that see validate-tm-direct.mjs: MAE=0.002°C, r=1.000 on identical sequences.");
+md.push("- **Positional agreement is expected to be low**: primer3 and primd use different penalty weightings. Position disagreement does not indicate error — both produce primers that amplify the target.");
+md.push("- **Plasmodium MSP1 (29% GC): 0 pairs from both tools** — correct behaviour. At 29% GC, even a 27 bp primer has Tm ≈ 52°C, below both tools' minimum Tm (57°C). Users targeting AT-rich organisms should lower tmTarget to 52–55°C.");
+md.push("- **Systematic bias**: the per-tool bias reflects different primer sequences selected (different length, GC%, position) — not a thermodynamic error.");
 md.push("");
 
 writeFileSync(join(OUT, "report.md"), md.join("\n") + "\n");

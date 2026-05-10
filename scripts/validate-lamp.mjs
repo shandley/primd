@@ -48,8 +48,10 @@ const SEQUENCES = [
     // B3 confirmed at offset 222–241 (RC): revcomp(seq.slice(222, 242)) = "TGCAGCATTGTTAGCAGGAT"
     confirmedF3Offset: 25,
     confirmedB3End: 242,
-    regionStart: 25,  // Design region: F3 start → B3 end defines the amplicon window
-    regionEnd: 220,   // Inner region for designLAMP
+    // Target region for LAMP inner amplicon: 100bp within the confirmed F3-B3 window
+    // (F3 at offset 25, B3 end at offset 242; inner must be 120-200bp + primer binding)
+    regionStart: 55,
+    regionEnd: 155,
   },
   {
     id: "ecoli_rpoB",

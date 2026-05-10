@@ -58,8 +58,8 @@ Total windows: 24
 | Streptomyces_actII | 66% | 1.068 | 1.076 | 0.371 | 0.328 |
 
 ## Interpretation notes
-- **Positional agreement** is expected to be low — both tools find valid primers at similar Tm but use different penalty weightings. primer3 prefers 20bp; primd scores accessibility and allows up to 27bp. Position disagreement does not indicate error.
-- **Tm MAE < 0.5°C** is within experimental measurement noise for standard oligonucleotides.
-- **Systematic bias**: positive bias means primd predicts higher Tm than primer3. This is expected if longer primers are selected (more NN stacking).
-- **Pearson r > 0.99** indicates the thermodynamic model is well-calibrated.
+- **Tm MAE and Pearson r here compare Tm of *different* primer sequences** (each tool selects its own). This is NOT a thermodynamic accuracy metric. For that see validate-tm-direct.mjs: MAE=0.002°C, r=1.000 on identical sequences.
+- **Positional agreement is expected to be low**: primer3 and primd use different penalty weightings. Position disagreement does not indicate error — both produce primers that amplify the target.
+- **Plasmodium MSP1 (29% GC): 0 pairs from both tools** — correct behaviour. At 29% GC, even a 27 bp primer has Tm ≈ 52°C, below both tools' minimum Tm (57°C). Users targeting AT-rich organisms should lower tmTarget to 52–55°C.
+- **Systematic bias**: the per-tool bias reflects different primer sequences selected (different length, GC%, position) — not a thermodynamic error.
 

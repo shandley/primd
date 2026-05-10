@@ -12,12 +12,25 @@
 
 | Sequence | GC% | Sets | Geometry | Tm ordering | Inner amp (bp) |
 |----------|-----|------|----------|-------------|----------------|
-| SARS2_N_gene | — | 0 | — | — | — |
+| SARS2_N_gene | 38% | 3 | ✅ pass | ✅ pass | 197 |
 | ecoli_rpoB | 57% | 3 | ✅ pass | ✅ pass | 167 |
 | human_GAPDH | 60% | 3 | ✅ pass | ✅ pass | 200 |
 | MTB_IS6110 | 64% | 1 | ✅ pass | ✅ pass | 175 |
 
 ### Best pair details per sequence
+
+#### SARS2_N_gene (SARS-CoV-2)
+
+| Primer | Sequence | Tm | Len |
+|--------|----------|----|-----|
+| F3 | `CAATAGCAGTCCAGATGACCA` | 60.06°C | 21 |
+| B3 | `TGTAGCACGATTGCAGCA` | 60.02°C | 18 |
+| FIP | `CGTCACCACCACGAATTCGTCTTGGCTACTACCGAAGAGCTACC` | F1c:65.53° F2:63.82° | 44 |
+| BIP | `TTGCAACTGAGGGAGCCTTGAATGCGGGTGCCAATGTGATCTT` | B1c:65.09° B2:65.69° | 43 |
+| LF | `ACCATCTTGGACTGAGATCTT` | 58.67°C | 21 |
+| LB | `AAGCTGGACTTCCCTATGGTG` | 62.4°C | 21 |
+
+**Design recovery** (vs published F3 at offset 25): F3 Δ24 bp, B3 Δ11 bp ⚠
 
 #### ecoli_rpoB (Escherichia coli K-12)
 
