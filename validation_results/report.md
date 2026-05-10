@@ -7,55 +7,55 @@ Total windows: 24
 
 ## A: Condition A: 50 mM NaCl, 0 mM Mg²⁺ (isolates NN accuracy)
 
-**16/24** windows where both tools returned primers (66.7%)
-
-### Tm accuracy
-| Metric | Fwd | Rev |
-|--------|-----|-----|
-| MAE (°C) | 0.588 | 0.811 |
-| RMSE (°C) | 0.769 | 1.017 |
-| Max Δ (°C) | 2.063 | 1.947 |
-| Pearson r (all Tms) | 0.27 | — |
-| Systematic bias (primd − p3, mean) | -0.297°C | — |
-
-### Primer characteristics
-| | primer3 | primd |
-|-|---------|-------|
-| Mean fwd length | 20.8 bp | 24 bp |
-| Same position (Δ≤2 bp) | — | 0% |
-| Same position (Δ≤10 bp) | — | 12.5% |
-
-## B: Condition B: 50 mM NaCl, 2 mM Mg²⁺, 0.8 mM dNTPs (typical PCR buffer)
-
 **17/24** windows where both tools returned primers (70.8%)
 
 ### Tm accuracy
 | Metric | Fwd | Rev |
 |--------|-----|-----|
-| MAE (°C) | 0.556 | 0.528 |
-| RMSE (°C) | 0.697 | 0.641 |
-| Max Δ (°C) | 1.365 | 1.158 |
-| Pearson r (all Tms) | 0.5262 | — |
-| Systematic bias (primd − p3, mean) | 0.019°C | — |
+| MAE (°C) | 0.931 | 0.879 |
+| RMSE (°C) | 1.148 | 1.104 |
+| Max Δ (°C) | 2.178 | 2.239 |
+| Pearson r (all Tms) | 0.442 | — |
+| Systematic bias (primd − p3, mean) | -0.623°C | — |
 
 ### Primer characteristics
 | | primer3 | primd |
 |-|---------|-------|
-| Mean fwd length | 19.9 bp | 19.6 bp |
+| Mean fwd length | 20.7 bp | 21.5 bp |
 | Same position (Δ≤2 bp) | — | 0% |
-| Same position (Δ≤10 bp) | — | 5.9% |
+| Same position (Δ≤10 bp) | — | 0% |
+
+## B: Condition B: 50 mM NaCl, 2 mM Mg²⁺, 0.8 mM dNTPs (typical PCR buffer)
+
+**19/24** windows where both tools returned primers (79.2%)
+
+### Tm accuracy
+| Metric | Fwd | Rev |
+|--------|-----|-----|
+| MAE (°C) | 0.684 | 0.568 |
+| RMSE (°C) | 0.896 | 0.745 |
+| Max Δ (°C) | 2.03 | 2.124 |
+| Pearson r (all Tms) | 0.3233 | — |
+| Systematic bias (primd − p3, mean) | -0.09°C | — |
+
+### Primer characteristics
+| | primer3 | primd |
+|-|---------|-------|
+| Mean fwd length | 19.9 bp | 19.5 bp |
+| Same position (Δ≤2 bp) | — | 0% |
+| Same position (Δ≤10 bp) | — | 5.3% |
 
 ## Per-sequence Tm MAE
 | Sequence | GC% | Cond A Fwd MAE | Cond A Rev MAE | Cond B Fwd MAE | Cond B Rev MAE |
 |----------|-----|----------------|----------------|----------------|----------------|
-| pUC19 | 52% | 0.178 | 0.339 | 0.905 | 0.62 |
-| ecoli_rpoB | 57% | 0.57 | 0.322 | 0.701 | 0.302 |
-| human_GAPDH | 60% | 0.604 | 0.641 | 0.206 | 0.344 |
-| human_TP53_exon5 | 44% | 0.482 | 0.719 | 0.511 | 0.694 |
-| MTB_IS6110 | 64% | 1.198 | 1.161 | 0.068 | 0.667 |
-| SARS2_ORF1a | 38% | 0.331 | 1.79 | 0.687 | 0.352 |
+| pUC19 | 52% | 1.873 | 1.562 | 1.231 | 0.527 |
+| ecoli_rpoB | 57% | 0.557 | 0.186 | 0.701 | 0.302 |
+| human_GAPDH | 60% | 1.255 | 1.272 | 1.097 | 1.143 |
+| human_TP53_exon5 | 44% | 0.288 | 0.85 | 0.567 | 0.553 |
+| MTB_IS6110 | 64% | 0.629 | 0.971 | 0.068 | 0.667 |
+| SARS2_ORF1a | 38% | 1.025 | 0.34 | 0.687 | 0.68 |
 | Pfalciparum_MSP1 | 29% | — | — | — | — |
-| Streptomyces_actII | 66% | 0.603 | 0.847 | 0.701 | 0.838 |
+| Streptomyces_actII | 66% | 1.068 | 1.076 | 0.371 | 0.328 |
 
 ## Interpretation notes
 - **Positional agreement** is expected to be low — both tools find valid primers at similar Tm but use different penalty weightings. primer3 prefers 20bp; primd scores accessibility and allows up to 27bp. Position disagreement does not indicate error.

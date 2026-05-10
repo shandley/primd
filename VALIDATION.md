@@ -73,12 +73,12 @@ Both tools design primers for the same target regions; the best pairs are compar
 
 | | Condition A (0 mM Mg²⁺) | Condition B (2 mM Mg²⁺) |
 |-|--------------------------|--------------------------|
-| Coverage (both found) | 66.7% | 70.8% |
-| Fwd Tm MAE | 0.59°C | 0.56°C |
-| Rev Tm MAE | 0.81°C | 0.53°C |
-| Positional agreement ≤10 bp | 12.5% | 5.9% |
-| Mean primer length — p3 | 20.8 bp | 19.9 bp |
-| Mean primer length — primd | 24.0 bp | 19.6 bp |
+| Coverage (both found) | 70.8% | 79.2% |
+| Fwd Tm MAE | 0.93°C | 0.68°C |
+| Rev Tm MAE | 0.88°C | 0.57°C |
+| Positional agreement ≤10 bp | ~10% | ~5% |
+| Mean primer length — p3 | 20.7 bp | 19.9 bp |
+| Mean primer length — primd | 21.5 bp | 19.5 bp |
 
 **Why positional agreement is low:** Both tools find primers with similar Tm at valid positions, but use different penalty weightings. primer3 strongly prefers 20 bp primers and minimizes distance from an optimal position; primd weights template accessibility and scores a longer primer with better thermodynamics. Position disagreement does not indicate error — both tools produce primers that would amplify the target. A 24 bp primer at position X and a 20 bp primer at position X+10 are both valid if their Tm values are within 1°C.
 
@@ -86,8 +86,8 @@ Both tools design primers for the same target regions; the best pairs are compar
 
 ## Limitations and Known Issues
 
-**1. primd systematically selects longer primers (Condition A only)**
-When Mg²⁺ is absent, primd tends to select longer primers (mean 24 bp vs primer3's 20 bp). This reflects the accessibility penalty in the scoring function: longer primers have more thermodynamic stability to overcome secondary structure. In Condition B with Mg²⁺, mean lengths equalize at 20 bp. This behavior is documented but not necessarily a limitation — longer primers can improve specificity.
+**1. primd length preference reduced but not eliminated**
+After adding an explicit `|len - 20| × 1.0` length penalty, mean primer length in Condition A improved from 24.0 bp to 21.5 bp (vs primer3's 20.7 bp). In Condition B with Mg²⁺, lengths are essentially equal (19.5 vs 19.9 bp). This reflects the accessibility penalty in the scoring function: longer primers have more thermodynamic stability to overcome secondary structure. In Condition B with Mg²⁺, mean lengths equalize at 20 bp. This behavior is documented but not necessarily a limitation — longer primers can improve specificity.
 
 **2. No experimental wet-lab validation**
 Neither primer set has been ordered and tested. The validation here is computational: thermodynamic implementation fidelity relative to primer3. Actual PCR success depends on additional factors (polymerase, template complexity, buffer optimization) not captured by either tool.

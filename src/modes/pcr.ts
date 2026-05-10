@@ -15,12 +15,15 @@ const DEFAULT_MAX_HETERO_DIMER_DG = -5.0;
 const DEFAULT_GC_RANGE: [number, number] = [0.40, 0.65];
 const DEFAULT_MAX_POLY_RUN = 4;
 const DEFAULT_NUM_RETURN = 5;
+const DEFAULT_OPT_PRIMER_LEN = 20;
 
 interface ScoringOpts {
 	tmTarget: number;
 	gcRange: [number, number];
 	maxHairpinDG: number;
 	maxSelfDimerDG: number;
+	/** Optimal primer length in bp. Deviations are penalised linearly. Default: 20 */
+	optPrimerLen: number;
 }
 
 function makePrimerCandidate(
@@ -59,8 +62,12 @@ function makePrimerCandidate(
 	const clampPenalty = gcClamp ? 0 : 3;
 	// Accessibility penalty: quadratic, starts when site is <50% likely single-stranded
 	const accessPenalty = Math.pow(Math.max(0, 0.5 - templateAccessibility), 2) * 80;
+	// Length penalty: linear deviation from optimal primer length (mirrors primer3's size penalty).
+	// Prevents the Tm optimiser from systematically favouring longer primers in low-salt conditions
+	// where shorter primers have lower-than-target Tm.
+	const lenPenalty = Math.abs(seq.length - primerOpts.optPrimerLen) * 1.0;
 
-	const penalty = tmPenalty + gcPenalty + hairpinPenalty + dimerPenalty + polyPenalty + clampPenalty + accessPenalty;
+	const penalty = tmPenalty + gcPenalty + hairpinPenalty + dimerPenalty + polyPenalty + clampPenalty + accessPenalty + lenPenalty;
 
 	return { seq, start, end, len: seq.length, tm: tmResult.tm, gc, gcClamp, hairpinDG, selfDimerDG, polyRun: poly, offTarget: 0, templateAccessibility, penalty };
 }
@@ -103,7 +110,8 @@ export function designPCR(
 	const fwdAccessProfile = calcAccessibilityProfile(reverseComplement(seq), avgPrimerLen, { annealTempC });
 	const revAccessProfile = calcAccessibilityProfile(seq, avgPrimerLen, { annealTempC });
 
-	const scoringOpts: ScoringOpts = { tmTarget, gcRange, maxHairpinDG, maxSelfDimerDG };
+	const optPrimerLen = opts.optPrimerLen ?? DEFAULT_OPT_PRIMER_LEN;
+	const scoringOpts: ScoringOpts = { tmTarget, gcRange, maxHairpinDG, maxSelfDimerDG, optPrimerLen };
 
 	// Generate forward candidates: left of the target region
 	const fwdCandidates: PrimerCandidate[] = [];

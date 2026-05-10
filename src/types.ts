@@ -121,6 +121,8 @@ export interface PCROptions extends ThermoOptions {
 	annealTempC?: number;
 	/** Minimum template accessibility [0,1] to pass the hard filter. Default: 0.05 */
 	minTemplateAccessibility?: number;
+	/** Optimal primer length in bp for the length penalty term. Default: midpoint of primerLenRange */
+	optPrimerLen?: number;
 }
 
 export interface PCRResult {
