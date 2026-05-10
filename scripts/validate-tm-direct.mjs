@@ -82,6 +82,7 @@ function p3Tm(seq, mono, divalent, dntp) {
     `PRIMER_SALT_DIVALENT=${divalent}`,
     `PRIMER_DNTP_CONC=${dntp}`,
     "PRIMER_DNA_CONC=250.0",
+    "PRIMER_MIN_TM=30.0",
     "PRIMER_SALT_CORRECTIONS=2",
     "PRIMER_TM_FORMULA=1",
     `PRIMER_THERMODYNAMIC_PARAMETERS_PATH=${P3_CONFIG}`,

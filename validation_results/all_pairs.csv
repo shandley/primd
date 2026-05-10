@@ -11,18 +11,18 @@ A,human_GAPDH,Homo sapiens,60,750,1050,true,true,59.842,60.191,59.57992563673485
 A,human_TP53_exon5,Homo sapiens,44,150,450,true,true,59.885,59.3,58.712711254275234,57.36363021650021,1.172,1.936,-1.172,-1.936,20,25,20,26,60,52,445,434,115,0,0
 A,human_TP53_exon5,Homo sapiens,44,450,750,true,true,59.375,59.977,59.53610611531889,59.77177770718458,0.161,0.205,0.161,-0.205,20,24,20,21,60,54.2,425,360,28,0,0
 A,human_TP53_exon5,Homo sapiens,44,750,1050,true,true,60.118,60.153,60.005761808325644,60.16763845600457,0.112,0.015,-0.112,0.015,20,21,20,24,60,57.1,372,401,30,0,0
-A,MTB_IS6110,Mycobacterium tuberculosis,65,150,450,false,true,,,61.8830069040456,61.07143371870484,,,,,,19,,20,,63.2,,430,,,
-A,MTB_IS6110,Mycobacterium tuberculosis,65,450,750,true,false,62.93,59.828,,,,,,,20,,20,,65,,447,,,,
-A,MTB_IS6110,Mycobacterium tuberculosis,65,750,1050,true,false,60.109,59.828,,,,,,,20,,20,,60,,437,,,,
-A,SARS2_ORF1a,SARS-CoV-2,38,150,450,false,false,,,,,,,,,,,,,,,,,,,
-A,SARS2_ORF1a,SARS-CoV-2,38,450,750,false,false,,,,,,,,,,,,,,,,,,,
-A,SARS2_ORF1a,SARS-CoV-2,38,750,1050,false,false,,,,,,,,,,,,,,,,,,,
-A,Pfalciparum_MSP1,Plasmodium falciparum,22,150,450,false,false,,,,,,,,,,,,,,,,,,,
-A,Pfalciparum_MSP1,Plasmodium falciparum,22,450,750,false,false,,,,,,,,,,,,,,,,,,,
-A,Pfalciparum_MSP1,Plasmodium falciparum,22,750,1050,false,false,,,,,,,,,,,,,,,,,,,
-A,Streptomyces_actII,Streptomyces coelicolor A3(2),72,150,450,false,false,,,,,,,,,,,,,,,,,,,
-A,Streptomyces_actII,Streptomyces coelicolor A3(2),72,450,750,false,false,,,,,,,,,,,,,,,,,,,
-A,Streptomyces_actII,Streptomyces coelicolor A3(2),72,750,1050,false,false,,,,,,,,,,,,,,,,,,,
+A,MTB_IS6110,Mycobacterium tuberculosis,64,150,450,true,true,60.135,60.159,58.071843033249706,58.717765326508356,2.063,1.441,-2.063,-1.441,20,20,20,24,60,60,380,390,6,0,1
+A,MTB_IS6110,Mycobacterium tuberculosis,64,450,750,true,true,60.57,59.831,60.23816946480446,58.9509395032282,0.332,0.88,-0.332,-0.88,20,27,20,20,60,48.1,448,428,45,0,0
+A,MTB_IS6110,Mycobacterium tuberculosis,64,750,1050,true,false,59.701,60.188,,,,,,,20,,20,,60,,443,,,,
+A,SARS2_ORF1a,SARS-CoV-2,38,150,450,true,true,59.264,57.236,58.60280930402848,59.18259457339599,0.661,1.947,-0.661,1.947,26,26,27,22,50,46.2,419,450,59,0,0
+A,SARS2_ORF1a,SARS-CoV-2,38,450,750,true,true,59.598,57.611,59.59931619587826,59.24433932825866,0.001,1.633,0.001,1.633,26,26,22,27,50,50,413,405,0,0,0
+A,SARS2_ORF1a,SARS-CoV-2,38,750,1050,false,true,,,58.132541329593494,55.40503948871492,,,,,,25,,27,,48,,445,,,
+A,Pfalciparum_MSP1,Plasmodium falciparum,29,150,450,false,false,,,,,,,,,,,,,,,,,,,
+A,Pfalciparum_MSP1,Plasmodium falciparum,29,450,750,false,false,,,,,,,,,,,,,,,,,,,
+A,Pfalciparum_MSP1,Plasmodium falciparum,29,750,1050,false,false,,,,,,,,,,,,,,,,,,,
+A,Streptomyces_actII,Streptomyces coelicolor A3(2),66,150,450,true,true,59.995,60.012,59.10800069198814,58.932401479964085,0.887,1.08,-0.887,-1.08,20,22,20,19,60,59.1,440,395,115,0,0
+A,Streptomyces_actII,Streptomyces coelicolor A3(2),66,450,750,true,false,60.33,60.126,,,,,,,20,,20,,60,,448,,,,
+A,Streptomyces_actII,Streptomyces coelicolor A3(2),66,750,1050,true,true,59.829,59.887,60.14742180644839,60.50065142665835,0.318,0.614,0.318,0.614,20,22,20,22,65,59.1,450,450,7,0,0
 B,pUC19,Cloning vector,52,150,450,true,true,59.94,59.155,58.590310401035424,58.768815010995525,1.35,0.386,-1.35,-0.386,21,18,20,20,47.619,55.6,449,350,110,0,0
 B,pUC19,Cloning vector,52,450,750,true,true,60.051,60.046,60.51050853977762,60.89959064114737,0.46,0.854,0.46,0.854,20,20,20,21,50,50,444,345,110,0,0
 B,pUC19,Cloning vector,52,750,1050,true,false,59.625,59.051,,,,,,,20,,20,,45,,450,,,,
@@ -35,15 +35,15 @@ B,human_GAPDH,Homo sapiens,60,750,1050,true,false,59.847,60.162,,,,,,,20,,20,,50
 B,human_TP53_exon5,Homo sapiens,44,150,450,true,true,60.228,59.886,60.996848217509694,61.043895366921845,0.769,1.158,0.769,1.158,20,22,20,22,55,50,431,430,80,0,0
 B,human_TP53_exon5,Homo sapiens,44,450,750,true,true,59.876,59.81,60.28698596803741,60.44097591573916,0.411,0.631,0.411,0.631,20,21,20,18,50,47.6,417,365,3,0,0
 B,human_TP53_exon5,Homo sapiens,44,750,1050,true,true,59.916,60.049,60.26867867707364,60.34076954168165,0.353,0.292,0.353,0.292,20,19,20,19,50,52.6,385,330,33,0,0
-B,MTB_IS6110,Mycobacterium tuberculosis,65,150,450,false,false,,,,,,,,,,,,,,,,,,,
-B,MTB_IS6110,Mycobacterium tuberculosis,65,450,750,false,false,,,,,,,,,,,,,,,,,,,
-B,MTB_IS6110,Mycobacterium tuberculosis,65,750,1050,false,false,,,,,,,,,,,,,,,,,,,
-B,SARS2_ORF1a,SARS-CoV-2,38,150,450,false,false,,,,,,,,,,,,,,,,,,,
-B,SARS2_ORF1a,SARS-CoV-2,38,450,750,false,false,,,,,,,,,,,,,,,,,,,
-B,SARS2_ORF1a,SARS-CoV-2,38,750,1050,false,false,,,,,,,,,,,,,,,,,,,
-B,Pfalciparum_MSP1,Plasmodium falciparum,22,150,450,false,false,,,,,,,,,,,,,,,,,,,
-B,Pfalciparum_MSP1,Plasmodium falciparum,22,450,750,false,false,,,,,,,,,,,,,,,,,,,
-B,Pfalciparum_MSP1,Plasmodium falciparum,22,750,1050,false,false,,,,,,,,,,,,,,,,,,,
-B,Streptomyces_actII,Streptomyces coelicolor A3(2),72,150,450,false,false,,,,,,,,,,,,,,,,,,,
-B,Streptomyces_actII,Streptomyces coelicolor A3(2),72,450,750,false,false,,,,,,,,,,,,,,,,,,,
-B,Streptomyces_actII,Streptomyces coelicolor A3(2),72,750,1050,false,false,,,,,,,,,,,,,,,,,,,
+B,MTB_IS6110,Mycobacterium tuberculosis,64,150,450,true,true,60.038,60.159,59.9999154077928,59.962999877076186,0.038,0.196,-0.038,-0.196,19,18,20,20,57.895,55.6,448,384,67,0,0
+B,MTB_IS6110,Mycobacterium tuberculosis,64,450,750,true,true,60.09,59.094,60.18795821995252,60.23311387980027,0.098,1.139,0.098,1.139,21,19,20,20,47.619,52.6,449,443,12,0,0
+B,MTB_IS6110,Mycobacterium tuberculosis,64,750,1050,true,false,60.172,59.907,,,,,,,19,,20,,47.368,,438,,,,
+B,SARS2_ORF1a,SARS-CoV-2,38,150,450,true,true,60.047,59.302,59.304584010995825,59.31043772082313,0.742,0.008,-0.742,0.008,20,19,20,18,45,52.6,444,445,8,0,1
+B,SARS2_ORF1a,SARS-CoV-2,38,450,750,true,true,60.364,60.36,59.49233785415191,59.52214949152847,0.872,0.838,-0.872,-0.838,20,20,20,22,50,50,405,372,9,0,0
+B,SARS2_ORF1a,SARS-CoV-2,38,750,1050,true,true,60.089,58.568,59.64156202003005,58.7779537612937,0.447,0.21,-0.447,0.21,20,22,20,22,50,45.5,444,391,16,0,0
+B,Pfalciparum_MSP1,Plasmodium falciparum,29,150,450,true,false,59.712,58.037,,,,,,,20,,22,,45,,427,,,,
+B,Pfalciparum_MSP1,Plasmodium falciparum,29,450,750,false,false,,,,,,,,,,,,,,,,,,,
+B,Pfalciparum_MSP1,Plasmodium falciparum,29,750,1050,false,false,,,,,,,,,,,,,,,,,,,
+B,Streptomyces_actII,Streptomyces coelicolor A3(2),66,150,450,true,true,60.576,60.257,61.761453508380896,61.35139579398066,1.185,1.094,1.185,1.094,20,20,18,18,45,55,422,393,100,0,0
+B,Streptomyces_actII,Streptomyces coelicolor A3(2),66,450,750,true,false,60.107,60.825,,,,,,,20,,19,,50,,402,,,,
+B,Streptomyces_actII,Streptomyces coelicolor A3(2),66,750,1050,true,true,60.128,59.981,59.91166348860418,59.40049201415104,0.216,0.581,-0.216,-0.581,19,19,20,18,57.895,57.9,374,448,0,0,0

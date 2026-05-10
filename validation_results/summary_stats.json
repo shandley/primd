@@ -2,59 +2,59 @@
   "A": {
     "condition": "Condition A: 50 mM NaCl, 0 mM Mg²⁺ (isolates NN accuracy)",
     "totalWindows": 24,
-    "bothFoundN": 10,
-    "bothFoundPct": 41.7,
+    "bothFoundN": 16,
+    "bothFoundPct": 66.7,
     "fwdTm": {
-      "n": 10,
-      "mean": 0.514,
-      "rmse": 0.614,
-      "max": 1.172
+      "n": 16,
+      "mean": 0.588,
+      "rmse": 0.769,
+      "max": 2.063
     },
     "revTm": {
-      "n": 10,
-      "mean": 0.538,
-      "rmse": 0.755,
-      "max": 1.936
+      "n": 16,
+      "mean": 0.811,
+      "rmse": 1.017,
+      "max": 1.947
     },
     "bias": {
-      "n": 10,
-      "mean": -0.112,
-      "rmse": 0.614,
+      "n": 16,
+      "mean": -0.297,
+      "rmse": 0.769,
       "max": 0.748
     },
-    "pearsonR": 0.5474,
+    "pearsonR": 0.27,
     "posMatch2bp": 0,
-    "posMatch10bp": 10,
-    "meanFwdLen_p3": 20,
-    "meanFwdLen_pm": 24.1
+    "posMatch10bp": 12.5,
+    "meanFwdLen_p3": 20.8,
+    "meanFwdLen_pm": 24
   },
   "B": {
     "condition": "Condition B: 50 mM NaCl, 2 mM Mg²⁺, 0.8 mM dNTPs (typical PCR buffer)",
     "totalWindows": 24,
-    "bothFoundN": 10,
-    "bothFoundPct": 41.7,
+    "bothFoundN": 17,
+    "bothFoundPct": 70.8,
     "fwdTm": {
-      "n": 10,
-      "mean": 0.586,
-      "rmse": 0.728,
+      "n": 17,
+      "mean": 0.556,
+      "rmse": 0.697,
       "max": 1.365
     },
     "revTm": {
-      "n": 10,
-      "mean": 0.491,
-      "rmse": 0.58,
+      "n": 17,
+      "mean": 0.528,
+      "rmse": 0.641,
       "max": 1.158
     },
     "bias": {
-      "n": 10,
-      "mean": 0.135,
-      "rmse": 0.728,
+      "n": 17,
+      "mean": 0.019,
+      "rmse": 0.697,
       "max": 1.365
     },
-    "pearsonR": 0.5773,
+    "pearsonR": 0.5262,
     "posMatch2bp": 0,
-    "posMatch10bp": 0,
-    "meanFwdLen_p3": 20,
+    "posMatch10bp": 5.9,
+    "meanFwdLen_p3": 19.9,
     "meanFwdLen_pm": 19.6
   }
 }

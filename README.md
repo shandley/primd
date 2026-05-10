@@ -199,6 +199,19 @@ Melting temperatures are calculated using the unified nearest-neighbor parameter
 
 Template accessibility is estimated with a two-state Boltzmann model: for each candidate binding site, the most stable overlapping hairpin (identified by an exhaustive O(n³) stem scan with SantaLucia 1998 stacking parameters and Turner 2004 loop penalties) defines a folding free energy ΔG at the annealing temperature. The accessible fraction is `1 / (1 + exp(−ΔG / RT))`.
 
+## Validation
+
+primd has been validated against primer3 (the field standard) using two complementary approaches. Full details are in [VALIDATION.md](VALIDATION.md).
+
+**Direct Tm comparison** — 150 synthetic oligos (18–27 bp, GC 22–74%) computed by both tools on identical sequences:
+
+| Condition | MAE (°C) | Pearson r | Bias |
+|-----------|----------|-----------|------|
+| 50 mM NaCl, 0 mM Mg²⁺ (Owczarzy 2004) | **0.002** | **1.000** | +0.002°C |
+| 50 mM NaCl, 2 mM Mg²⁺ (Owczarzy 2008 vs 2004) | 0.150 | 0.9996 | −0.150°C |
+
+The NN implementation is exact relative to primer3. The 0.15°C systematic bias under Mg²⁺ reflects the intentional use of Owczarzy 2008 vs primer3's Owczarzy 2004 divalent correction — Owczarzy 2008 accounts for dNTP chelation of free Mg²⁺. Users switching from primer3 with standard PCR buffer should expect primd Tm values to be ~0.15°C lower, which is within the 1–2°C experimental noise of oligonucleotide Tm measurements.
+
 ## Browser and Node.js compatibility
 
 primd is ESM-only and has no runtime dependencies. It uses no browser APIs in its computation path, so it runs identically in:
